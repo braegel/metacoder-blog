@@ -8,7 +8,7 @@ package de.metacoder.blog.entities {
 		author : Author,
 		title : String,
 		content : String,
-		comments : List[Comment]
+		comments : Map[Long, Comment]
 	)
 
 	case class Comment(

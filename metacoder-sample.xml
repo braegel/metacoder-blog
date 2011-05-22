@@ -4,31 +4,36 @@
 		<author id="0" name="Afripowered" email="mail@felixbecker.name" realname="Felix Becker" password="osterei">
 			<description />
 		</author>
+		<author id="1" name="SuperTux88" email="benjamin@coding4coffee.ch" realname="Benjamin Neff" password="Schinken">
+			<description>
+				Hasst Montage
+			</description>
+		</author>
 	</authors>
 
 	<entries>
 
-		<entry id="0" date="unixtimestamp" author="0">
+		<entry id="0" date="123" author="0">
 			<title>Testeintrag</title>
 			<content>Das ist ein Testeintrag</content>
 			<comments>
-				<comment id="0" date="timestamp" author="ich">
+				<comment id="0" date="58295" author="4">
 					<content>Hi, ich bin ein comment</content>
 				</comment>
-				<comment id="1" date="timestamp" author="ich auch">
+				<comment id="1" date="5825792859" author="4">
 					<content>1i, ich bin ein comment</content>
 				</comment>
 			</comments>
 		</entry>
 
-		<entry id="1" date="unixtimestamp" author="0">
+		<entry id="1" date="123456" author="0">
 			<title>1Testeintrag</title>
 			<content>1Das ist ein Testeintrag</content>
 			<comments>
-				<comment id="0" date="timestamp" author="benjamin">
+				<comment id="0" date="859589779852" author="3">
 					<content>Hi, ich bin ein comment</content>
 				</comment>
-				<comment id="1" date="timestamp" author="auch benjamin">
+				<comment id="1" date="582758975" author="3">
 					<content>1i, ich bin ein comment</content>
 				</comment>
 			</comments>
