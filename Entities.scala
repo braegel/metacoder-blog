@@ -15,7 +15,6 @@ package de.metacoder.blog.entities {
 		id : Long, 
 		date : Date, 
 		author : String, 
-		title : String, 
 		content : String
 	)
 
