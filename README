@@ -1,0 +1,17 @@
+Build-Instruktionen Metacoder-Blog 0.1 - Stand 22.05.2011
+
+Dieses Projekt wird gebaut mit:
+    - Scala 2.9.0
+    - SBT 0.7.7
+
+Um aus dem SBT-Projekt ein IDEA-Project zu generieren, welches man mit der IntelliJ IDEA IDE oeffnen kann,
+muss man folgende Schritte durchfuehren:
+
+sbt aufrufen und folgende Befehle eingeben:
+
+ > *sbtIdeaRepo at http://mpeltonen.github.com/maven/
+ > *idea is com.github.mpeltonen sbt-idea-processor 0.4.0
+ > update
+ > idea
+
+ Das sorgt dafuer, dass entsprechende *.iml-Projektdateien fuer IntelliJ IDEA generiert werden.
