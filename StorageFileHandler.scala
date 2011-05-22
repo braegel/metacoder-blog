@@ -1,6 +1,7 @@
 package de.metacoder.blog.xmlengine 
 
 import java.io.File
+import scala.xml.XML
 
 trait StorageFileHandler {
 	var storageFile : Option[File] = None
@@ -22,12 +23,17 @@ trait StorageFileHandler {
 			// TODO log
 		}
 
+
 		val storageFile = new File(userHome + fileSeparator + configDirName + fileSeparator + storageFileName)
 
 		if(!storageFile.exists){
-			storageFile.createNewFile
+			//storageFile.createNewFile
+			val initXML = <metacoder />
+			XML.save(storageFile.getAbsolutePath, initXML, "utf-8", true)
 			// TODO log
 		}
+
+
 		this.storageFile = Some(storageFile)
 		storageFile
 	}

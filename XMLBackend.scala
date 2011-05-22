@@ -13,7 +13,10 @@ object Persister extends Actor with StorageFileHandler {
 				case 'load => reply(List())
 				case 'die => exit
 				case _ => {
-					println("oh, my storage file is " + getOrCreateStorageFile)
+					import scala.xml.XML
+					val xml = XML.loadFile(getOrCreateStorageFile)
+					println(xml)
+//					println("oh, my storage file is " + getOrCreateStorageFile)
 					reply("schinken")
 				}
 			}
