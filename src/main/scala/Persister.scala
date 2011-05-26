@@ -19,7 +19,7 @@ object Persister extends Actor with StorageFileHandler with Logging {
 				case 'load => {
           loadAuthorsFromXML
           loadEntriesFromXML
-          reply((authors,entries))
+          reply((authors getOrElse loadAuthorsFromXML,entries getOrElse loadEntriesFromXML))
         }
 
         case ('persist, authors : Map[Long, Author], entries : Map[Long, Entry]) => {
@@ -38,14 +38,10 @@ object Persister extends Actor with StorageFileHandler with Logging {
           persist
         }
 
-        case ('persist) => {
-           persist
-        }
-
+        case ('persist) => persist
 				case 'die => exit
-				case x => {
-				  logger fatal ("illegal call in Persister Actor " + x)
-				}
+				case x => logger fatal ("illegal call in Persister Actor " + x)
+
 			}
 		}
 	}
@@ -56,7 +52,7 @@ object Persister extends Actor with StorageFileHandler with Logging {
     val xml = <metacoder>
       <authors>
       {
-        for((id, author) <- authors.getOrElse({loadAuthorsFromXML; authors.get})) yield {
+        for((id, author) <- authors getOrElse loadAuthorsFromXML) yield {
           <author id={id.toString} name={author.name} email={author.email} password={author.password}>
             <description>{author.description}</description>
           </author>
@@ -65,7 +61,7 @@ object Persister extends Actor with StorageFileHandler with Logging {
       </authors>
       <entries>
         {
-          for((entryId, entry) <- entries.getOrElse({loadEntriesFromXML; entries.get})) yield {
+          for((entryId, entry) <- entries getOrElse loadEntriesFromXML) yield {
             <entry id={entryId.toString} date={entry.date.getTime.toString} authorId={entry.authorId.toString} authorName={entry.authorName}>
               <title>{entry.title}</title>
               <content>{entry.content}</content>
@@ -88,7 +84,7 @@ object Persister extends Actor with StorageFileHandler with Logging {
     logger debug "persisted authors and entries in " + getOrCreateStorageFile.getAbsolutePath
   }
 
-  private def loadAuthorsFromXML {
+  private def loadAuthorsFromXML = {
     val xml = XML loadFile getOrCreateStorageFile
     logger debug "loading authors from xml"
     var newAuthors = Map[Long, Author]()
@@ -105,9 +101,10 @@ object Persister extends Actor with StorageFileHandler with Logging {
     authors = Some(newAuthors)
     logger debug "loaded authors from xml"
     logger trace authors
+    newAuthors
   }
 
-  private def loadEntriesFromXML {
+  private def loadEntriesFromXML = {
     logger debug "loading entries from xml"
     val xml = XML loadFile getOrCreateStorageFile
     var newEntries = Map[Long, Entry]()
@@ -137,6 +134,7 @@ object Persister extends Actor with StorageFileHandler with Logging {
     entries = Some(newEntries)
     logger debug "loaded entries from xml"
     logger trace entries
+    newEntries
   }
 }
 
