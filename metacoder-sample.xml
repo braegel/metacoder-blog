@@ -1,39 +1,37 @@
 <?xml version='1.0' encoding='utf-8'?>
 <metacoder>
 	<authors>
-		<author id="0" name="Afripowered" email="mail@felixbecker.name" realname="Felix Becker" password="osterei">
+		<author id="0" name="Felix Becker" email="mail@felixbecker.name" password="osterei">
 			<description />
 		</author>
-		<author id="1" name="SuperTux88" email="benjamin@coding4coffee.ch" realname="Benjamin Neff" password="Schinken">
-			<description>
-				Hasst Montage
-			</description>
+		<author id="1" name="Benjamin Neff" email="benjamin@coding4coffee.ch" password="Schinken">
+			<description>Hasst Montage</description>
 		</author>
 	</authors>
 
 	<entries>
 
-		<entry id="0" date="123" author="0">
+		<entry id="0" date="123" authorId="0" authorName="Felix Becker">
 			<title>Testeintrag</title>
 			<content>Das ist ein Testeintrag</content>
 			<comments>
-				<comment id="0" date="58295" author="4">
+				<comment id="0" date="58295" authorName="Schinken Peter">
 					<content>Hi, ich bin ein comment</content>
 				</comment>
-				<comment id="1" date="5825792859" author="4">
+				<comment id="1" date="5825792859" authorName="4">
 					<content>1i, ich bin ein comment</content>
 				</comment>
 			</comments>
 		</entry>
 
-		<entry id="1" date="123456" author="0">
+		<entry id="1" date="123456" authorId="0" authorName="Felix Becker">
 			<title>1Testeintrag</title>
 			<content>1Das ist ein Testeintrag</content>
 			<comments>
-				<comment id="0" date="859589779852" author="3">
+				<comment id="0" date="859589779852" authorName="Bar">
 					<content>Hi, ich bin ein comment</content>
 				</comment>
-				<comment id="1" date="582758975" author="3">
+				<comment id="1" date="582758975" authorName="FOo">
 					<content>1i, ich bin ein comment</content>
 				</comment>
 			</comments>

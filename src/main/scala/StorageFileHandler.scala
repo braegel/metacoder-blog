@@ -1,9 +1,10 @@
-package de.metacoder.blog.xmlengine 
+package de.metacoder.blog.xmlengine
 
+import _root_.de.metacoder.blog.util.Logging
 import java.io.File
 import scala.xml.XML
 
-trait StorageFileHandler {
+trait StorageFileHandler extends Logging {
 	var storageFile : Option[File] = None
 
 	def getOrCreateStorageFile = storageFile.getOrElse(createStorageFile)
@@ -19,18 +20,17 @@ trait StorageFileHandler {
 		val configDir = new File(userHome + fileSeparator + configDirName)
 
 		if(!configDir.isDirectory) {
-			configDir.mkdirs
-			// TODO log
+			logger info "creating persistence folder in " + configDir.getAbsolutePath
+      configDir.mkdirs
 		}
 
 
 		val storageFile = new File(userHome + fileSeparator + configDirName + fileSeparator + storageFileName)
 
 		if(!storageFile.exists){
-			//storageFile.createNewFile
+      logger info "creating persistent xml storage in " + storageFile.getAbsolutePath
 			val initXML = <metacoder />
 			XML.save(storageFile.getAbsolutePath, initXML, "utf-8", true)
-			// TODO log
 		}
 
 

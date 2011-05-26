@@ -8,6 +8,7 @@ object XMLBackend extends App with Logging {
 	Persister start()
 	val future = Persister !! 'load
 	logger trace future.apply
-
+  Persister !! 'persist
 	Persister !! 'die
+
 }

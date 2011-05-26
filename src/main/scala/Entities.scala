@@ -5,7 +5,8 @@ package de.metacoder.blog.entities {
 	case class Entry(
 		id : Long, 
 		date : Date,
-		author : Author,
+		authorId : Long,
+    authorName : String,
 		title : String,
 		content : String,
 		comments : Map[Long, Comment]
@@ -14,15 +15,14 @@ package de.metacoder.blog.entities {
 	case class Comment(
 		id : Long, 
 		date : Date, 
-		author : String, 
+		authorName : String,
 		content : String
 	)
 
 	case class Author(
 		id : Long, 
 		name : String,
-		email : String, 
-		realName : String, 
+		email : String,
 		description : String, 
 		password : String
 	)
