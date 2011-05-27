@@ -1,16 +1,17 @@
 package de.metacoder.blog.xmlengine
 
-import _root_.de.metacoder.blog.util.Logging
+import de.metacoder.blog.util.Logging
 import java.io.File
 import scala.xml.XML
 
 trait StorageFileHandler extends Logging {
-	var storageFile : Option[File] = None
+
+	private var storageFile : Option[File] = None
 
 	def getOrCreateStorageFile = storageFile.getOrElse(createStorageFile)
 
 	private def createStorageFile : File = {
-		println("createStorageFile called")
+		logger debug "createStorageFile called"
 		/* constants */
 		val storageFileName = "storage.xml"
 		val userHome = System.getProperty("user.home")
@@ -24,7 +25,6 @@ trait StorageFileHandler extends Logging {
       configDir.mkdirs
 		}
 
-
 		val storageFile = new File(userHome + fileSeparator + configDirName + fileSeparator + storageFileName)
 
 		if(!storageFile.exists){
@@ -32,7 +32,6 @@ trait StorageFileHandler extends Logging {
 			val initXML = <metacoder />
 			XML.save(storageFile.getAbsolutePath, initXML, "utf-8", true)
 		}
-
 
 		this.storageFile = Some(storageFile)
 		storageFile

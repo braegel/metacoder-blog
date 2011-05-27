@@ -1,29 +1,28 @@
-package de.metacoder.blog.entities {
+package de.metacoder.blog.entities
 
-	import java.util.Date
+import java.util.Date
 
-	case class Entry(
-		id : Long, 
-		date : Date,
-		authorId : Long,
-    authorName : String,
-		title : String,
-		content : String,
-		comments : Map[Long, Comment]
-	)
+case class Entry(
+  id : Long,
+  date : Date,
+  authorId : Long,
+  authorName : String,
+  title : String,
+  content : String,
+  comments : Map[Long, Comment]
+)
 
-	case class Comment(
-		id : Long, 
-		date : Date, 
-		authorName : String,
-		content : String
-	)
+case class Comment(
+  id : Long,
+  date : Date,
+  authorName : String,
+  content : String
+)
 
-	case class Author(
-		id : Long, 
-		name : String,
-		email : String,
-		description : String, 
-		password : String
-	)
-}
+case class Author(
+  id : Long,
+  name : String,
+  email : String,
+  description : String,
+  password : String
+)
