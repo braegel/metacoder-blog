@@ -8,13 +8,13 @@
     <display-name>Metacoder Blog</display-name>
 
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>de.metacoder.blog.Hello</servlet-class>
+        <servlet-name>MetacoderServlet</servlet-name>
+        <servlet-class>de.metacoder.blog.servlets.MetacoderServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
+        <servlet-name>MetacoderServlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
 </web-app>
