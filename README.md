@@ -1,6 +1,7 @@
 # Build-Instruktionen Metacoder-Blog 0.1 - Stand 11.06.2011
 
 Dieses Projekt wird gebaut mit:
+
 * Scala 2.9.0
 * SBT 0.10.0
 
@@ -11,7 +12,7 @@ muss man folgende Schritte durchfuehren:
 
 	libraryDependencies += "org.sbtidea" %% "xsbt-idea" % "0.1"
 
-Und bis es in einem Maven Repo ist:
+Und bis das idea-plugin in einem Maven Repo ist:
 
 ~/.sbt/plugins/project/Build.scala
 
