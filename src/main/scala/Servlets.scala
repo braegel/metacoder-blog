@@ -1,17 +1,16 @@
 package de.metacoder.blog.servlets
 
-import _root_.de.metacoder.blog.modules.{Greeting, Renderable}
+import de.metacoder.blog.modules.{Greeting, Renderable, Sample}
 import de.metacoder.blog.entities.{Entry, Author}
 import de.metacoder.blog.util.Logging
 import de.metacoder.blog.xmlengine.Persister
 import javax.servlet.http.{HttpServletResponse, HttpServletRequest, HttpServlet}
-import java.lang.RuntimeException
 import collection.parallel.immutable.ParMap
-import xml.XML
 import java.util.Date
 import xml.parsing.XhtmlParser
-import collection.immutable.HashMap
-import java.security.Key
+import xml.transform.{RuleTransformer, RewriteRule}
+import xml._
+
 
 class MetacoderServlet extends HttpServlet with Logging {
 
@@ -19,7 +18,7 @@ class MetacoderServlet extends HttpServlet with Logging {
 
   var authors : ParMap[Long, Author] = null;
   var entries : ParMap[Long, Entry] = null;
-  val modules = Map("greetingModule" -> new Greeting).par
+  val modules : Map[String, Renderable] = Map("greetingModule" -> new Greeting, "sampleModule" -> new Sample)
 
 
   Persister !? 'load match {
@@ -31,17 +30,24 @@ class MetacoderServlet extends HttpServlet with Logging {
   }
 
   override def doGet(request : HttpServletRequest, response : HttpServletResponse) : Unit = {
-    response.getWriter.flush()
-    logger debug ("loading xml" + new Date())
-    val xhtml = XhtmlParser(scala.io.Source.fromURL(getServletContext.getResource("/templates/blog.xhtml")))
-    logger debug ("loaded xml" + new Date())
-    response.getWriter.println(xhtml)
+    logger debug "loading xhtml template"
+    var xhtmlTemplate = XhtmlParser(scala.io.Source.fromURL(getServletContext.getResource("/templates/blog.xhtml")))
     for((key, value) <- modules){
-      //xhtml match {
-      //  case entry @id == key =>
-      //}
-      response.getWriter.println(value.render(request.getRequestURL.toString))
+      logger debug  "trying to apply module " + key
+      val moduleRenderOutput = value.render(request.getRequestURL.toString)
+
+      object ModuleInjectRule extends RewriteRule {
+        override def transform(n: Seq[Node]): Seq[Node] = n match {
+          case Elem(prefix, tag, attribs, scope, _*) if attribs.get("id").exists(_.text == key) => {
+            Elem(prefix, tag, attribs, scope, moduleRenderOutput)
+          }
+          case other => other
+        }
+      }
+
+      xhtmlTemplate = new RuleTransformer(ModuleInjectRule) transform xhtmlTemplate
     }
+    xhtmlTemplate map response.getWriter.println
     response.getWriter.flush()
   }
 }

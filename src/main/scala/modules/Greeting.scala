@@ -1,6 +1,6 @@
 package de.metacoder.blog.modules
 
-import xml.NodeSeq
+import xml.Node
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,7 +10,7 @@ import xml.NodeSeq
  */
 
 class Greeting extends Renderable  {
-  def render(url : String) : NodeSeq = {
+  def render(url : String) : Node = {
     <h3>Hello World, you called the url: {url}</h3>
   }
 }
