@@ -1,12 +1,11 @@
 package de.metacoder.blog.servlets
 
-import de.metacoder.blog.modules.{Greeting, Renderable, Sample}
+import de.metacoder.blog.modules.{Copyright, Renderable}
 import de.metacoder.blog.entities.{Entry, Author}
 import de.metacoder.blog.util.Logging
 import de.metacoder.blog.xmlengine.Persister
 import javax.servlet.http.{HttpServletResponse, HttpServletRequest, HttpServlet}
 import collection.parallel.immutable.ParMap
-import java.util.Date
 import xml.parsing.XhtmlParser
 import xml.transform.{RuleTransformer, RewriteRule}
 import xml._
@@ -18,7 +17,7 @@ class MetacoderServlet extends HttpServlet with Logging {
 
   var authors : ParMap[Long, Author] = null;
   var entries : ParMap[Long, Entry] = null;
-  val modules : Map[String, Renderable] = Map("greetingModule" -> new Greeting, "sampleModule" -> new Sample)
+  val modules : Map[String, Renderable] = Map("copyrightModule" -> new Copyright)
 
 
   Persister !? 'load match {
