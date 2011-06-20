@@ -6,6 +6,8 @@ import scala.actors.Actor
 
 object Persister extends Actor with XMLPersister with XMLLoader with Logging {
 
+  start // run actor when object initializes
+
 	def act {
 		loop {
 			react {

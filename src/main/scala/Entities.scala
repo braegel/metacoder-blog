@@ -1,6 +1,7 @@
 package de.metacoder.blog.entities
 
 import java.util.Date
+import xml.Node
 
 case class Entry(
   id : Long,

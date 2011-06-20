@@ -39,6 +39,12 @@ trait XMLPersister extends XMLLoader with Logging {
       </entries>
     </metacoder>
 
+
+
+    val html =
+
+
+
     XML.save(getOrCreateStorageFile.getAbsolutePath, xml, "UTF-8", true)
     logger debug "persisted authors and entries in " + getOrCreateStorageFile.getAbsolutePath
   }

@@ -1,6 +1,6 @@
 package de.metacoder.blog.servlets
 
-import de.metacoder.blog.modules.{Copyright, Renderable}
+import _root_.de.metacoder.blog.modules.{BlogPosts, Copyright, Renderable}
 import de.metacoder.blog.entities.{Entry, Author}
 import de.metacoder.blog.util.Logging
 import de.metacoder.blog.xmlengine.Persister
@@ -13,26 +13,18 @@ import xml._
 
 class MetacoderServlet extends HttpServlet with Logging {
 
-  Persister start
-
-  var authors : ParMap[Long, Author] = null;
-  var entries : ParMap[Long, Entry] = null;
-  val modules : Map[String, Renderable] = Map("copyrightModule" -> new Copyright)
 
 
-  Persister !? 'load match {
-    case (authors : Map[Long, Author], entries : Map[Long, Entry]) => {
-      logger debug "received authors and entries from Persister"
-      this.authors = authors.par;
-      this.entries = entries.par;
-    }
-  }
+  val modules : Map[String, Renderable] = Map("copyrightModule" -> new Copyright, "blogpostsModule" -> new BlogPosts)
+
+
 
   override def doGet(request : HttpServletRequest, response : HttpServletResponse) : Unit = {
     logger debug "loading xhtml template"
     var xhtmlTemplate = XhtmlParser(scala.io.Source.fromURL(getServletContext.getResource("/templates/blog.xhtml")))
     for((key, value) <- modules){
       logger debug  "trying to apply module " + key
+
       val moduleRenderOutput = value.render(request.getRequestURL.toString)
 
       object ModuleInjectRule extends RewriteRule {

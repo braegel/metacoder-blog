@@ -1,15 +1,16 @@
 package de.metacoder.blog.modules
 
+import de.metacoder.blog.util.Logging
 import xml.Node
 
-/**
- * Created by IntelliJ IDEA.
- * Author: fbe und SuperTux88
- * Date: 29.05.11
- * Time: 17:44
- */
+trait Renderable extends Logging {
 
-trait Renderable {
+  private var renderHandler : PartialFunction[String, Node] = { case _ => <p>Render handler for {this} is not defined</p> }
 
-  def render(url : String) : Node
+  def render(url : String) = renderHandler(url)
+
+  protected def onRender(handler : PartialFunction[String, Node]){
+    renderHandler = handler;
+  }
+
 }
