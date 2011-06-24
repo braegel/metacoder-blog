@@ -1,6 +1,6 @@
 package de.metacoder.blog.servlets
 
-import _root_.de.metacoder.blog.modules.{BlogPosts, Copyright, Renderable}
+import _root_.de.metacoder.blog.modules.{Title, BlogPosts, Copyright, Renderable}
 import de.metacoder.blog.entities.{Entry, Author}
 import de.metacoder.blog.util.Logging
 import de.metacoder.blog.xmlengine.Persister
@@ -15,23 +15,20 @@ class MetacoderServlet extends HttpServlet with Logging {
 
 
 
-  val modules : Map[String, Renderable] = Map("copyrightModule" -> new Copyright, "blogpostsModule" -> new BlogPosts)
+  val modules : List[Renderable] = List(new Copyright, new BlogPosts, new Title)
 
 
 
   override def doGet(request : HttpServletRequest, response : HttpServletResponse) : Unit = {
     logger debug "loading xhtml template"
     var xhtmlTemplate = XhtmlParser(scala.io.Source.fromURL(getServletContext.getResource("/templates/blog.xhtml")))
-    for((key, value) <- modules){
-      logger debug  "trying to apply module " + key
+    for(module <- modules){
 
-      val moduleRenderOutput = value.render(request.getRequestURL.toString)
+      val moduleRenderOutput = module.render(request.getRequestURL.toString)
 
       object ModuleInjectRule extends RewriteRule {
         override def transform(n: Seq[Node]): Seq[Node] = n match {
-          case Elem(prefix, tag, attribs, scope, _*) if attribs.get("id").exists(_.text == key) => {
-            Elem(prefix, tag, attribs, scope, moduleRenderOutput)
-          }
+          case elem : Elem if module.elementMatches(elem) => moduleRenderOutput
           case other => other
         }
       }
@@ -41,7 +38,6 @@ class MetacoderServlet extends HttpServlet with Logging {
 
 
     val output = new StringBuilder
-
 
     output append """<?xml version="1.0" encoding="UTF-8"?>""" + "\n"
     output append """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">""" + "\n"

@@ -1,15 +1,23 @@
 package de.metacoder.blog.modules
 
 import de.metacoder.blog.util.Logging
-import xml.Node
+import xml.Elem
+import java.lang.Boolean
 
 trait Renderable extends Logging {
 
-  private var renderHandler : PartialFunction[String, Node] = { case _ => <p>Render handler for {this} is not defined</p> }
+  val matchingRule : MatchingRule
+
+
+
+  def elementMatches(elem : Elem): Boolean = matchingRule elementMatches elem
+
+
+  private var renderHandler : PartialFunction[String, Elem] = { case _ => <p>Render handler for {this} is not defined</p> }
 
   def render(url : String) = renderHandler(url)
 
-  protected def onRender(handler : PartialFunction[String, Node]){
+  protected def onRender(handler : PartialFunction[String, Elem]){
     renderHandler = handler;
   }
 
