@@ -1,3 +1,27 @@
 body {
+  width:960px;
+  margin:auto;
+  border: 1px solid #CCCCCC;
+  font-family:Arial, Verdana, sans-serif;
+}
 
+h1 {
+    color:blue;
+}
+
+#mainnav {
+    border-width: 1px 0px;
+    border-color: #CCC;
+    border-style: solid;
+    padding: 5px 10px;
+}
+
+#mainnav li {
+    display:inline;
+}
+
+address {
+    border-top:1px solid #CCC;
+    padding:5px;
+    text-align:center;
 }
