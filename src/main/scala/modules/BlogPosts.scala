@@ -25,15 +25,13 @@ class BlogPosts extends Renderable {
 
   onRender {
     case _ => {
-      <div>
+      <div id="blogEntries">
         {
           for ((key, value) <- entries) yield {
-           <div>
             <h3>{value.title}</h3>
-            <div>
+            <div class="entry">
               {value.content}
             </div>
-           </div>
           }
         }
       </div>
