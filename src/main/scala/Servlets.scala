@@ -38,7 +38,21 @@ class MetacoderServlet extends HttpServlet with Logging {
 
       xhtmlTemplate = new RuleTransformer(ModuleInjectRule) transform xhtmlTemplate
     }
-    xhtmlTemplate map response.getWriter.println
-    response.getWriter.flush()
+
+
+    val output = new StringBuilder
+
+
+    output append """<?xml version="1.0" encoding="UTF-8"?>""" + "\n"
+    output append """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">""" + "\n"
+    xhtmlTemplate map(node => Xhtml.toXhtml(x = node, sb = output, decodeEntities = true));
+
+
+    response setCharacterEncoding "UTF-8"
+    response setContentType "text/html; charset=utf-8"
+    response setContentLength output.toString().getBytes.length
+
+    response.getWriter print output
+
   }
 }

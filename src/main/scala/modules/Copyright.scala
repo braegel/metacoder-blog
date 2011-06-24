@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat
 class Copyright extends Renderable {
 
  onRender {
-   case x : String => {
+   case _ => {
      val currentYear = new SimpleDateFormat("yyyy") format (new Date)
      <address id="copyright">&copy; {if (currentYear != "2011") "2011 - "}{currentYear} by Benjamin Neff &amp; Felix Becker</address>
    }
