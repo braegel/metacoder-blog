@@ -1,11 +1,8 @@
 package de.metacoder.blog.servlets
 
-import _root_.de.metacoder.blog.modules.{Title, BlogPosts, Copyright, Renderable}
-import de.metacoder.blog.entities.{Entry, Author}
+import _root_.de.metacoder.blog.modules._
 import de.metacoder.blog.util.Logging
-import de.metacoder.blog.xmlengine.Persister
 import javax.servlet.http.{HttpServletResponse, HttpServletRequest, HttpServlet}
-import collection.parallel.immutable.ParMap
 import xml.parsing.XhtmlParser
 import xml.transform.{RuleTransformer, RewriteRule}
 import xml._
@@ -13,29 +10,30 @@ import xml._
 
 class MetacoderServlet extends HttpServlet with Logging {
 
-
-
-  val modules : List[Renderable] = List(new Copyright, new BlogPosts, new Title)
-
-
+  val modules : List[(String, Renderable)] = List(
+    (".*", new Copyright),
+    ("/blog.highspeed", new BlogPosts),
+    ("/about.highspeed", new About),
+    (".*", new Title)
+  )
 
   override def doGet(request : HttpServletRequest, response : HttpServletResponse) : Unit = {
     logger debug "loading xhtml template"
     var xhtmlTemplate = XhtmlParser(scala.io.Source.fromURL(getServletContext.getResource("/templates/blog.xhtml")))
-    for(module <- modules){
 
-      val moduleRenderOutput = module.render(request.getRequestURL.toString)
+    for((urlPattern, module) <- modules){
 
-      object ModuleInjectRule extends RewriteRule {
-        override def transform(n: Seq[Node]): Seq[Node] = n match {
-          case elem : Elem if module.elementMatches(elem) => moduleRenderOutput
-          case other => other
+      if(request.getRequestURI.matches(urlPattern)){
+
+        object ModuleInjectRule extends RewriteRule {
+          override def transform(n: Seq[Node]): Seq[Node] = n match {
+            case elem : Elem if module.elementMatches(elem) => module.render(request.getRequestURI.toString)
+            case other => other
+          }
         }
+        xhtmlTemplate = new RuleTransformer(ModuleInjectRule) transform xhtmlTemplate
       }
-
-      xhtmlTemplate = new RuleTransformer(ModuleInjectRule) transform xhtmlTemplate
-    }
-
+     }
 
     val output = new StringBuilder
 
@@ -49,6 +47,5 @@ class MetacoderServlet extends HttpServlet with Logging {
     response setContentLength output.toString().getBytes.length
 
     response.getWriter print output
-
   }
 }

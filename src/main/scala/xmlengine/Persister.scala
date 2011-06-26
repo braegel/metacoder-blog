@@ -13,8 +13,6 @@ object Persister extends Actor with XMLPersister with XMLLoader with Logging {
 			react {
 
 				case 'load => {
-          loadAuthorsFromXML
-          loadEntriesFromXML
           reply((authors getOrElse loadAuthorsFromXML,entries getOrElse loadEntriesFromXML))
         }
 

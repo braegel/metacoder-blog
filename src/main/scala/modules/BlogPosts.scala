@@ -9,7 +9,7 @@ import xml.Node
 
 class BlogPosts extends Renderable {
 
-  val matchingRule = IdMatchingRule("blogpostsModule")
+  val matchingRule = IdMatchingRule("mainContentModule")
 
   var authors : Map[Long, Author] = null;
   var entries : Map[Long, Entry] = null;
