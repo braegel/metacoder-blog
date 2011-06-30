@@ -1,6 +1,6 @@
 package de.metacoder.blog.servlets
 
-import _root_.de.metacoder.blog.modules._
+import de.metacoder.blog.modules._
 import de.metacoder.blog.util.Logging
 import javax.servlet.http.{HttpServletResponse, HttpServletRequest, HttpServlet}
 import xml.parsing.XhtmlParser

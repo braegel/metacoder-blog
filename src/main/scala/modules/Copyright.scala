@@ -1,6 +1,5 @@
 package de.metacoder.blog.modules
 
-import xml.Node
 import java.util.Date
 import java.text.SimpleDateFormat
 
@@ -13,13 +12,12 @@ import java.text.SimpleDateFormat
 
 class Copyright extends Renderable {
 
- val matchingRule = IdMatchingRule("copyrightModule")
+  val matchingRule = IdMatchingRule("copyrightModule")
 
- onRender {
-   case _ => {
-     val currentYear = new SimpleDateFormat("yyyy") format (new Date)
-     <address id="copyright">&copy; {if (currentYear != "2011") "2011 - "}{currentYear} by Benjamin Neff &amp; Felix Becker</address>
-   }
- }
-
+  onRender {
+    case _ => {
+      val currentYear = new SimpleDateFormat("yyyy") format (new Date)
+      <address id="copyright">&copy; {if (currentYear != "2011") "2011 - "}{currentYear} by Benjamin Neff &amp; Felix Becker</address>
+    }
+  }
 }

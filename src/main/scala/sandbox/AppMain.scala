@@ -1,4 +1,4 @@
-package sandbox
+package de.metacoder.blog.sandbox
 
 import de.metacoder.blog.util.Logging
 import de.metacoder.blog.xmlengine.Persister

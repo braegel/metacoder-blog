@@ -1,4 +1,4 @@
-package sandbox
+package de.metacoder.blog.sandbox
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,6 +29,4 @@ object Sandbox extends App {
   counter2(4)
   counter(5)
   counter2(6)
-
-
 }

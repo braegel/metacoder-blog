@@ -14,12 +14,16 @@ h1 {
     line-height:99px;
     vertical-align:center;
 }
+h1 a:link, h1 a:hover, h1 a:active, h1 a:visited {
+    color:white;
+    text-decoration:none;
+}
 
 #mainnav {
-    border-width: 0px 1px 1px 1px;
-    border-color: #CCC;
-    border-style: solid;
-    padding: 5px 10px;
+    border-width:0px 1px 1px 1px;
+    border-color:#CCC;
+    border-style:solid;
+    padding:5px 10px;
     margin-top:0px;
 }
 
@@ -28,7 +32,7 @@ h1 {
     padding-right:10px;
 }
 
-#mainnav a:link, a:hover, a:active, a:visited {
+#mainnav a:link, #mainnav a:hover, #mainnav a:active, #mainnav a:visited {
     color:black;
     font-weight:bold;
     text-decoration:none;
@@ -46,16 +50,16 @@ address {
     line-height:180%;
     background-color:white;
     padding:5px;
-    border: 1px dotted #CCC;
+    border:1px dotted #CCC;
 }
 
 #blogEntries h3 {
     background-color:white;
-    border: 1px dotted #CCC;
+    border:1px dotted #CCC;
     border-bottom:0px;
     padding:5px;
     margin:20px 0px 0px 0px;
-    color:#0000CC;
+    color:#00C;
     font-size:14pt;
 }
 

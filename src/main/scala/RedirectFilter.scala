@@ -1,9 +1,7 @@
 package de.metacoder.blog
 
-import java.io.IOException
 import javax.servlet._
-import http.{HttpServletResponse, HttpServletRequest}
-import scala.throws
+import http.HttpServletResponse
 import util.Logging
 
 /**
@@ -15,11 +13,9 @@ import util.Logging
 
 class RedirectFilter extends Filter with Logging{
 
-  def init(filterconfig : FilterConfig) {
-  }
+  def init(filterconfig : FilterConfig) {}
 
   def doFilter(request : ServletRequest, response : ServletResponse, chain : FilterChain) = response.asInstanceOf[HttpServletResponse].sendRedirect("/blog.highspeed")
 
-  def destroy() {
-  }
+  def destroy() {}
 }

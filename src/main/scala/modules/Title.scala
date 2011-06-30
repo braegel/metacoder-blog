@@ -1,7 +1,5 @@
 package de.metacoder.blog.modules
 
-import java.util.Date
-import java.text.SimpleDateFormat
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,9 +14,7 @@ class Title extends Renderable {
 
  onRender {
    case url : String => {
-     val currentYear = new SimpleDateFormat("yyyy") format (new Date)
-     <title>Metacoder.de {currentYear} by Benjamin Neff and Felix Becker</title>
+     <title>Metacoder.de - Because it's fun</title>
    }
  }
-
 }

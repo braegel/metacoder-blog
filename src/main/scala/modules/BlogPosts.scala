@@ -2,9 +2,6 @@ package de.metacoder.blog.modules
 
 import de.metacoder.blog.entities.{Entry, Author}
 import de.metacoder.blog.xmlengine.Persister
-import collection.parallel.immutable.ParMap
-import org.apache.log4j.Category._
-import xml.Node
 
 
 class BlogPosts extends Renderable {
@@ -22,7 +19,6 @@ class BlogPosts extends Renderable {
     }
   }
 
-
   onRender {
     case _ => {
       <div id="blogEntries">
@@ -36,5 +32,5 @@ class BlogPosts extends Renderable {
         }
       </div>
     }
- }
+  }
 }
