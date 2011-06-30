@@ -33,7 +33,7 @@ class MetacoderServlet extends HttpServlet with Logging {
         }
         xhtmlTemplate = new RuleTransformer(ModuleInjectRule) transform xhtmlTemplate
       }
-     }
+    }
 
     val output = new StringBuilder
 

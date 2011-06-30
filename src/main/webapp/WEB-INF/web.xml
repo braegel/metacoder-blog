@@ -12,9 +12,19 @@
         <servlet-class>de.metacoder.blog.servlets.MetacoderServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>de.metacoder.blog.servlets.AdminServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>MetacoderServlet</servlet-name>
         <url-pattern>*.highspeed</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>*.admin</url-pattern>
     </servlet-mapping>
     
     <filter>

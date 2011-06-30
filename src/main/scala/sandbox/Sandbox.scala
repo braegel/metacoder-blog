@@ -1,3 +1,5 @@
+package sandbox
+
 /**
  * Created by IntelliJ IDEA.
  * Author: fbe und SuperTux88
