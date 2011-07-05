@@ -1,0 +1,38 @@
+digraph medacoder_admin{
+#	rankdir = LR;
+	Start -> Login
+	ranksep = "1"
+
+	 {
+	rank="same"
+	Add;
+	Edit;
+	DeleteConfirm;
+	}
+
+	Login -> Login [label = "loginFailed"]
+	Login -> Main [label ="loginSuccessful"]
+	
+	Main -> Add [label = "add"]
+	Main -> Edit [label = "edit"]
+	Main -> DeleteConfirm [label = "delete"]
+
+	Add -> Main [label ="cancel"]
+	Add -> Preview [label="save"]
+	Add -> LogoutConfirm [label="logout"]
+
+	Edit -> Main [label ="cancel"]
+	Edit -> Preview [label="save"]
+	Edit -> LogoutConfirm [label="logout"]
+
+	DeleteConfirm -> Main [label = "cancel"]
+	DeleteConfirm -> Main [label = "confirmDelete"]
+	DeleteConfirm -> LogoutConfirm [label="logout"]
+
+	Preview -> Main [label="save"]
+	Preview -> Main [label="cancel"]
+	Preview -> Add [label="cancelAdd"]
+	Preview -> Edit [label="cancelEdit"]
+	Preview -> LogoutConfirm [label="cancelEdit"]
+	LogoutConfirm -> Login [label="login"]
+}
